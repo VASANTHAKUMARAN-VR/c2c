@@ -13,7 +13,7 @@ const NoticePage = () => {
     const fetchNotices = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/auth/student/${collegeCode}/notices`
+          `https://c2c-4fy4.onrender.com/api/auth/student/${collegeCode}/notices`
         );
         const data = await res.json();
         setNotices(data);
@@ -50,7 +50,7 @@ const NoticePage = () => {
 
               {n.image && (
                 <img
-                  src={`http://localhost:5000/uploads/${n.image}`}
+                  src={`https://c2c-4fy4.onrender.com/uploads/${n.image}`}
                   alt={n.title}
                 />
               )}

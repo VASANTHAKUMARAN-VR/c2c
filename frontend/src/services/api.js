@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/api/auth";
+const BASE_URL = "https://c2c-4fy4.onrender.com/api/auth";
 
 export const loginUser = async (email, password) => {
   try {
@@ -9,7 +9,7 @@ export const loginUser = async (email, password) => {
     });
     return await res.json();
   } catch (err) {
-    return { error: "Server Error",err };
+    return { error: "Server Error", err };
   }
 };
 
@@ -22,7 +22,7 @@ export const sendOtp = async (email) => {
     });
     return await res.json();
   } catch (err) {
-    return { error: "Server Error",err };
+    return { error: "Server Error", err };
   }
 };
 
@@ -35,10 +35,9 @@ export const resetPassword = async (email, otp, newPassword) => {
     });
     return await res.json();
   } catch (err) {
-    return { error: "Server Error",err };
+    return { error: "Server Error", err };
   }
 };
-
 
 export const studentSignup = async (name, email, password, collegeCode) => {
   try {
@@ -49,7 +48,7 @@ export const studentSignup = async (name, email, password, collegeCode) => {
     });
     return await res.json();
   } catch (err) {
-    return { error: "Server Error",err };
+    return { error: "Server Error", err };
   }
 };
 
@@ -62,6 +61,6 @@ export const verifyStudentOtp = async (email, otp) => {
     });
     return await res.json();
   } catch (err) {
-    return { error: "Server Error",err };
+    return { error: "Server Error", err };
   }
 };

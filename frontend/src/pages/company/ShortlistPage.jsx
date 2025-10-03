@@ -8,7 +8,7 @@ const ShortlistPage = () => {
     if (!skill || !ugCgpa) return;
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/eligible-students", {
+      const res = await fetch("https://c2c-4fy4.onrender.com/api/auth/eligible-students", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ skill, ugCgpa: Number(ugCgpa) }),

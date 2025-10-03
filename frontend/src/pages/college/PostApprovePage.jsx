@@ -13,7 +13,7 @@ const PostApprovePage = () => {
     const fetchNotices = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/auth/college/${collegeCode}/notices`
+          `https://c2c-4fy4.onrender.com/api/auth/college/${collegeCode}/notices`
         );
         const data = await res.json();
         setNotices(data);
@@ -30,11 +30,14 @@ const PostApprovePage = () => {
   const handleApprove = async (noticeId) => {
     setLoadingIds((prev) => [...prev, noticeId]);
     try {
-      await fetch(`http://localhost:5000/api/auth/notice/${noticeId}/approve`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ collegeCode }),
-      });
+      await fetch(
+        `https://c2c-4fy4.onrender.com/api/auth/notice/${noticeId}/approve`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ collegeCode }),
+        }
+      );
       setNotices((prev) => prev.filter((n) => n._id !== noticeId));
     } catch (err) {
       console.error("Approve error:", err);
@@ -46,11 +49,14 @@ const PostApprovePage = () => {
   const handleReject = async (noticeId) => {
     setLoadingIds((prev) => [...prev, noticeId]);
     try {
-      await fetch(`http://localhost:5000/api/auth/notice/${noticeId}/reject`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ collegeCode }),
-      });
+      await fetch(
+        `https://c2c-4fy4.onrender.com/api/auth/notice/${noticeId}/reject`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ collegeCode }),
+        }
+      );
       setNotices((prev) => prev.filter((n) => n._id !== noticeId));
     } catch (err) {
       console.error("Reject error:", err);
@@ -77,7 +83,10 @@ const PostApprovePage = () => {
 
       {notices.length === 0 ? (
         <div className="no-notices">
-          <CheckCircle size={64} style={{ marginBottom: "20px", opacity: 0.3 }} />
+          <CheckCircle
+            size={64}
+            style={{ marginBottom: "20px", opacity: 0.3 }}
+          />
           <p>No pending notices at the moment</p>
           <p style={{ fontSize: "14px", marginTop: "10px", color: "#a0aec0" }}>
             All caught up! New notices will appear here for approval.
@@ -88,10 +97,10 @@ const PostApprovePage = () => {
           <div key={n._id} className="notice-card">
             <h3>{n.title}</h3>
             <p>{n.description}</p>
-            
+
             {n.image && (
               <img
-                src={`http://localhost:5000/uploads/${n.image}`}
+                src={`https://c2c-4fy4.onrender.com/uploads/${n.image}`}
                 alt={n.title}
                 width="200"
               />
@@ -102,7 +111,10 @@ const PostApprovePage = () => {
                 onClick={() => handleApprove(n._id)}
                 disabled={loadingIds.includes(n._id)}
               >
-                <CheckCircle size={16} style={{ marginRight: "8px", display: "inline" }} />
+                <CheckCircle
+                  size={16}
+                  style={{ marginRight: "8px", display: "inline" }}
+                />
                 {loadingIds.includes(n._id) ? "Approving..." : "Approve"}
               </button>
 
@@ -110,7 +122,10 @@ const PostApprovePage = () => {
                 onClick={() => handleReject(n._id)}
                 disabled={loadingIds.includes(n._id)}
               >
-                <XCircle size={16} style={{ marginRight: "8px", display: "inline" }} />
+                <XCircle
+                  size={16}
+                  style={{ marginRight: "8px", display: "inline" }}
+                />
                 {loadingIds.includes(n._id) ? "Rejecting..." : "Reject"}
               </button>
             </div>

@@ -10,7 +10,9 @@ const ViewProfilePage = () => {
     const fetchProfile = async () => {
       if (!user.id) return;
       try {
-        const res = await fetch(`http://localhost:5000/api/auth/profile/${user.id}`);
+        const res = await fetch(
+          `https://c2c-4fy4.onrender.com/api/auth/profile/${user.id}`
+        );
         if (!res.ok) {
           console.log("Profile not found");
           return;
@@ -19,21 +21,22 @@ const ViewProfilePage = () => {
         const profileData = data?.profile || data || {};
 
         const cleanedProfile = { ...profileData };
-delete cleanedProfile._id;
-delete cleanedProfile.studentId;
-delete cleanedProfile.__v;
+        delete cleanedProfile._id;
+        delete cleanedProfile.studentId;
+        delete cleanedProfile.__v;
 
-cleanedProfile.semesterScores = Array.isArray(cleanedProfile.semesterScores)
-  ? cleanedProfile.semesterScores
-  : [];
+        cleanedProfile.semesterScores = Array.isArray(
+          cleanedProfile.semesterScores
+        )
+          ? cleanedProfile.semesterScores
+          : [];
 
-cleanedProfile.education = Array.isArray(cleanedProfile.education)
-  ? cleanedProfile.education.map(edu => {
-      const { _id, ...rest } = edu || {};
-      return rest;
-    })
-  : [];
-
+        cleanedProfile.education = Array.isArray(cleanedProfile.education)
+          ? cleanedProfile.education.map((edu) => {
+              const { _id, ...rest } = edu || {};
+              return rest;
+            })
+          : [];
 
         setProfile(cleanedProfile);
       } catch (err) {
@@ -44,7 +47,8 @@ cleanedProfile.education = Array.isArray(cleanedProfile.education)
     fetchProfile();
   }, [user.id]);
 
-  if (!profile || Object.keys(profile).length === 0) return <p>Loading profile...</p>;
+  if (!profile || Object.keys(profile).length === 0)
+    return <p>Loading profile...</p>;
 
   return (
     <div className="profile-view">
@@ -53,10 +57,12 @@ cleanedProfile.education = Array.isArray(cleanedProfile.education)
         <tbody>
           {Object.entries(profile).map(([key, value]) => (
             <tr key={key}>
-              <td style={{ fontWeight: "bold", verticalAlign: "top" }}>{key}</td>
+              <td style={{ fontWeight: "bold", verticalAlign: "top" }}>
+                {key}
+              </td>
               <td>
                 {key === "semesterScores"
-                  ? (value || []).map(v => (v === null ? "" : v)).join(", ")
+                  ? (value || []).map((v) => (v === null ? "" : v)).join(", ")
                   : key === "education"
                   ? (value || []).map((edu, idx) => (
                       <div key={idx} style={{ marginBottom: "8px" }}>
@@ -74,7 +80,10 @@ cleanedProfile.education = Array.isArray(cleanedProfile.education)
         </tbody>
       </table>
 
-      <button style={{ marginTop: "20px" }} onClick={() => navigate("/student")}>
+      <button
+        style={{ marginTop: "20px" }}
+        onClick={() => navigate("/student")}
+      >
         ⬅ Back to Dashboard
       </button>
     </div>

@@ -35,7 +35,7 @@ const CreateProfilePage = () => {
     const fetchProfile = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/auth/profile/${user.id}`
+          `https://c2c-4fy4.onrender.com/api/auth/profile/${user.id}`
         );
         if (res.ok) {
           const data = await res.json();
@@ -78,12 +78,10 @@ const CreateProfilePage = () => {
     });
   };
 
-
-
   // Submit to backend
   const handleProfileSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/api/auth/profile", {
+    const res = await fetch("https://c2c-4fy4.onrender.com/api/auth/profile", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(profile),
@@ -240,8 +238,6 @@ const CreateProfilePage = () => {
           onChange={handleChange}
           placeholder="Skillset"
         />
-
-       
 
         <button type="submit">
           {editing ? "Update Profile" : "Submit Profile"}
