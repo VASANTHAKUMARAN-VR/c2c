@@ -24,7 +24,7 @@ app.use(express.json());
 // ✅ Enable CORS
 app.use(
   cors({
-    origin: "https://c2c-iota.vercel.app/", // React frontend
+    origin: "https://c2c-iota.vercel.app", // React frontend
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
